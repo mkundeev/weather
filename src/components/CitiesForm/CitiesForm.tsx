@@ -1,5 +1,6 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useRef } from "react";
 import { CITIES } from "../../const/cities";
+
 interface IProps {
   setCities: Dispatch<React.SetStateAction<Partial<typeof CITIES>>>;
   cities: Partial<typeof CITIES>;
@@ -22,8 +23,13 @@ export default function CitiesForm({ setCities, cities }: IProps) {
   return (
     <form>
       {Object.entries(CITIES).map(([city, value]) => (
-        <div key={city}>
-          <label htmlFor={city}>{city}</label>
+        <div
+          key={city}
+          className="table-border flex justify-between w-full px-2"
+        >
+          <label htmlFor={city} className="capitalize">
+            {city}
+          </label>
           <input
             type="checkbox"
             id={city}

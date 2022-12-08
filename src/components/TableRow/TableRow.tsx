@@ -9,7 +9,7 @@ interface IProps {
 export default function TableRow({ data }: IProps) {
   return (
     <>
-      <td className="table-border px-2">{data.city}</td>
+      <td className="table-border px-2 capitalize">{data.city}</td>
       <td className="table-border px-2">{data.minTemp}</td>
       <td className="table-border px-2">{data.maxTemp}</td>
     </>

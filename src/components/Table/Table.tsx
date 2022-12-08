@@ -13,7 +13,7 @@ export default function Table({ data }: IProps) {
   return (
     <>
       {data && (
-        <table className="border-collapse table-border mt-8">
+        <table className="border-collapse table-border h-fit">
           <thead className="table-border bg-slate-900 text-white">
             <tr className="table-border">
               <th className="table-border px-2 w-40">City</th>
@@ -24,7 +24,7 @@ export default function Table({ data }: IProps) {
           <tbody>
             {data.map((data) => (
               <tr className="table-border" key={data.city}>
-                <TableRow data={data} />
+                {data.minTemp && <TableRow data={data} />}
               </tr>
             ))}
           </tbody>
