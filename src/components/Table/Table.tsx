@@ -15,7 +15,7 @@ export default function Table({ data }: IProps) {
   return (
     <>
       {data && (
-        <table className="border-collapse h-fit bg-white">
+        <table className="border-collapse h-fit ">
           <thead className="table-border bg-slate-900 text-orange-400">
             <tr className="table-border">
               {tableHeader.map((name) => (
@@ -34,13 +34,13 @@ export default function Table({ data }: IProps) {
                 {data.minTemp ? (
                   <TableRow data={data} />
                 ) : (
-                  <td colSpan={3}>
+                  <td colSpan={3} className="bg-transparent">
                     <div className="relative left-1/3 translate-x-1/2 w-fit">
                       <ThreeDots
                         height="40"
                         width="80"
                         radius="9"
-                        color="grey"
+                        color="white"
                         visible={true}
                       />
                     </div>
