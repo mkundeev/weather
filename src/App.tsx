@@ -8,15 +8,18 @@ import { serialiseWeatherData } from "./utils/serialiseWeatherData";
 import { getWeather } from "./services/weatherService";
 import { initialValue, CITIES } from "./const/cities";
 import { useCitiesFormOpen } from "./hooks/useCitiesFormOpen";
+import { useDatePicker } from "./hooks/useDatePicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const [cities, setCities] = useState<Partial<typeof CITIES>>(initialValue);
   const { isCitiesForm, handleOpen, ref } = useCitiesFormOpen();
+  const { startDate, queryDate, handleDate } = useDatePicker();
 
   let weatherData;
   const { data } = useQuery({
-    queryKey: Object.values(cities),
-    queryFn: () => getWeather(Object.values(cities)),
+    queryKey: [Object.values(cities), queryDate],
+    queryFn: () => getWeather(Object.values(cities), queryDate),
   });
 
   if (data) weatherData = serialiseWeatherData(data, Object.keys(cities));
@@ -28,10 +31,7 @@ function App() {
           <AddCitiesBtn onClick={handleOpen} isOpen={isCitiesForm} />
           {isCitiesForm && <CitiesForm setCities={setCities} cities={cities} />}
         </div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date: Date) => setStartDate(date)}
-        />
+        <DatePicker selected={startDate} onChange={handleDate} />
       </div>
       {weatherData && <Table data={weatherData} />}
     </div>
