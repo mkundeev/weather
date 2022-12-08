@@ -3,7 +3,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 export default function Loader() {
   return (
-    <div className="w-fit mx-auto mt-10">
+    <div className="w-fit">
       <RotatingLines
         strokeColor="grey"
         strokeWidth="5"

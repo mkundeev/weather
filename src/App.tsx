@@ -5,13 +5,14 @@ import Table from "./components/Table";
 import CitiesForm from "./components/CitiesForm";
 import AddCitiesBtn from "./components/AddCitiesBtn";
 import Loader from "./components/Loader";
+import ErrorHandler from "./components/ErrorHandler";
 import { serialiseWeatherData } from "./utils/serialiseWeatherData";
 import { getWeather } from "./services/weatherService";
 import { initialValue, CITIES } from "./const/cities";
 import { useCitiesFormOpen } from "./hooks/useCitiesFormOpen";
 import { useDatePicker } from "./hooks/useDatePicker";
+import { AnimatePresence } from "framer-motion";
 import "react-datepicker/dist/react-datepicker.css";
-import ErrorHandler from "./components/ErrorHandler";
 
 function App() {
   const [cities, setCities] = useState<Partial<typeof CITIES>>(initialValue);
@@ -27,15 +28,21 @@ function App() {
   if (data) weatherData = serialiseWeatherData(data, Object.keys(cities));
 
   return (
-    <>
+    <div className="w-fit mx-auto px-4 flex gap-4 mt-10">
       {weatherData && (
-        <div className="w-fit mx-auto px-4 flex gap-4 mt-10">
+        <>
           <div className="w-40">
             <div className="mb-6" ref={ref}>
               <AddCitiesBtn onClick={handleOpen} isOpen={isCitiesForm} />
-              {isCitiesForm && (
-                <CitiesForm setCities={setCities} cities={cities} />
-              )}
+              <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+              >
+                {isCitiesForm && (
+                  <CitiesForm setCities={setCities} cities={cities} />
+                )}
+              </AnimatePresence>
             </div>
             <DatePicker
               selected={startDate}
@@ -45,11 +52,11 @@ function App() {
             />
           </div>
           <Table data={weatherData} />
-        </div>
+        </>
       )}
       {isLoading && <Loader />}
       {isError && <ErrorHandler error={error} />}
-    </>
+    </div>
   );
 }
 

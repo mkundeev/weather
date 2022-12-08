@@ -1,5 +1,7 @@
 import React, { Dispatch } from "react";
+import { motion } from "framer-motion";
 import { CITIES } from "../../const/cities";
+import { dropIn } from "../../utils/citiesFormAnimation";
 
 interface IProps {
   setCities: Dispatch<React.SetStateAction<Partial<typeof CITIES>>>;
@@ -21,7 +23,14 @@ export default function CitiesForm({ setCities, cities }: IProps) {
   };
 
   return (
-    <form className="absolute w-40 z-10 bg-white">
+    <motion.form
+      variants={dropIn}
+      initial="hidden"
+      animate="visible"
+      transition={{ type: "spring", bounce: 0 }}
+      exit="exit"
+      className="absolute w-40 z-10 bg-white"
+    >
       {Object.entries(CITIES).map(([city, value]) => (
         <div
           key={city}
@@ -58,6 +67,6 @@ export default function CitiesForm({ setCities, cities }: IProps) {
           </div>
         </div>
       ))}
-    </form>
+    </motion.form>
   );
 }
