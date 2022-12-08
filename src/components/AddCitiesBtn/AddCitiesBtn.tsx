@@ -11,7 +11,7 @@ export default function AddCitiesBtn({ onClick, isOpen }: IProps) {
       className="px-2 table-border cursor-pointer flex justify-between items-center"
       onClick={onClick}
     >
-      <p className="block">Add cities</p>
+      <p>Add cities</p>
       {isOpen ? <MdArrowDropUp /> : <MdArrowDropDown />}
     </div>
   );

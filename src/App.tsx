@@ -26,12 +26,17 @@ function App() {
 
   return (
     <div className="w-fit mx-auto px-4 flex gap-4 mt-10">
-      <div>
-        <div className="w-40" ref={ref}>
+      <div className="w-40">
+        <div className="mb-6" ref={ref}>
           <AddCitiesBtn onClick={handleOpen} isOpen={isCitiesForm} />
           {isCitiesForm && <CitiesForm setCities={setCities} cities={cities} />}
         </div>
-        <DatePicker selected={startDate} onChange={handleDate} />
+        <DatePicker
+          selected={startDate}
+          onChange={handleDate}
+          minDate={new Date()}
+          className="table-border w-40 px-2 cursor-pointer"
+        />
       </div>
       {weatherData && <Table data={weatherData} />}
     </div>

@@ -6,4 +6,43 @@
   .table-border {
     @apply border border-slate-400;
   }
+    input:checked+div {
+      @apply border-slate-900 bg-slate-900;
+    }
+  
+    input:checked+div svg {
+      @apply block;
+    }
 }
+
+div .react-datepicker__day--selected {
+  @apply bg-orange-400 text-slate-900 font-bold
+}
+div .react-datepicker__day--keyboard-selected {
+  @apply bg-orange-400 text-slate-900 font-bold
+}
+div .react-datepicker__day--selected:hover {
+  @apply bg-orange-400 text-slate-900 font-bold
+}
+div .react-datepicker__day:hover {
+  @apply bg-orange-400 text-slate-900 font-bold
+}
+div .react-datepicker__header {
+  @apply bg-slate-900
+}
+div .react-datepicker__current-month {
+  @apply text-white
+}
+div .react-datepicker__day-name {
+  @apply text-white
+}
+div .react-datepicker__navigation-icon::before{
+  @apply border-white mt-2
+}
+div .react-datepicker__navigation-icon::before:hover {
+  @apply border-orange-400 mt-2
+}
+div .react-datepicker__triangle {
+  @apply hidden
+}
+

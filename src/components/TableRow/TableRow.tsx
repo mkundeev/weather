@@ -10,8 +10,8 @@ export default function TableRow({ data }: IProps) {
   return (
     <>
       <td className="table-border px-2 capitalize">{data.city}</td>
-      <td className="table-border px-2">{data.minTemp}</td>
-      <td className="table-border px-2">{data.maxTemp}</td>
+      <td className="table-border px-2 text-center">{data.minTemp}</td>
+      <td className="table-border px-2 text-center">{data.maxTemp}</td>
     </>
   );
 }
