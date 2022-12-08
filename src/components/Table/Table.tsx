@@ -1,55 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+import React from "react";
+import { useTable } from "../../hooks/useTable";
 import TableHeaderCell from "../TableHeaderCell";
 import TableRow from "../TableRow";
+import { IData } from "../types/types";
+import { ThreeDots } from "react-loader-spinner";
 
 interface IProps {
-  data: {
-    city: string;
-    minTemp: number;
-    maxTemp: number;
-  }[];
+  data: IData[];
 }
 export default function Table({ data }: IProps) {
-  const [sortField, setSortField] = useState("");
-  const [order, setOrder] = useState("asc");
-  const [tableData, setTableData] = useState(data);
+  const { handleSortingChange, sortField, order, tableData } = useTable(data);
   const tableHeader = ["city", "minTemp", "maxTemp"];
-
-  const handleSorting = (
-    sortField: keyof typeof data[0],
-    sortOrder: string
-  ) => {
-    if (sortField) {
-      const sorted = [...tableData].sort((a, b) => {
-        return (
-          a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
-            numeric: true,
-          }) * (sortOrder === "asc" ? 1 : -1)
-        );
-      });
-      setTableData(sorted);
-    }
-  };
-  const handleSortingChange = (e: React.MouseEvent<Element>) => {
-    const sortOrder =
-      e.currentTarget.id === sortField && order === "asc" ? "desc" : "asc";
-    setSortField(e.currentTarget.id);
-    setOrder(sortOrder);
-    if (
-      e.currentTarget.id === "city" ||
-      e.currentTarget.id === "minTemp" ||
-      e.currentTarget.id === "maxTemp"
-    )
-      handleSorting(e.currentTarget.id, sortOrder);
-  };
-
-  useEffect(() => setTableData(data), [data]);
 
   return (
     <>
       {data && (
-        <table className="border-collapse table-border h-fit">
+        <table className="border-collapse h-fit">
           <thead className="table-border bg-slate-900 text-orange-400">
             <tr className="table-border">
               {tableHeader.map((name) => (
@@ -64,8 +30,22 @@ export default function Table({ data }: IProps) {
           </thead>
           <tbody>
             {tableData.map((data) => (
-              <tr className="table-border" key={data.city}>
-                {data.minTemp && <TableRow data={data} />}
+              <tr key={data.city}>
+                {data.minTemp ? (
+                  <TableRow data={data} />
+                ) : (
+                  <td colSpan={3}>
+                    <div className="relative left-1/3 translate-x-1/2 w-fit">
+                      <ThreeDots
+                        height="40"
+                        width="80"
+                        radius="9"
+                        color="grey"
+                        visible={true}
+                      />
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
