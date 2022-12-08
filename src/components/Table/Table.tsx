@@ -15,7 +15,7 @@ export default function Table({ data }: IProps) {
   return (
     <>
       {data && (
-        <table className="border-collapse h-fit">
+        <table className="border-collapse h-fit bg-white">
           <thead className="table-border bg-slate-900 text-orange-400">
             <tr className="table-border">
               {tableHeader.map((name) => (

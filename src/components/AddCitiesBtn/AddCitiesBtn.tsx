@@ -8,7 +8,7 @@ interface IProps {
 export default function AddCitiesBtn({ onClick, isOpen }: IProps) {
   return (
     <div
-      className="px-2 table-border cursor-pointer flex justify-between items-center"
+      className="px-2 table-border cursor-pointer flex justify-between items-center bg-white"
       onClick={onClick}
     >
       <p>Add cities</p>
