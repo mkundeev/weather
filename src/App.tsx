@@ -49,6 +49,7 @@ function App() {
                 selected={startDate}
                 onChange={handleDate}
                 minDate={new Date()}
+                maxDate={new Date(new Date().getTime() + 86400000 * 7)}
                 className="table-border w-40 px-2 cursor-pointer"
               />
             </div>
